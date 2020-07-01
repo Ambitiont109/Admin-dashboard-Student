@@ -1,0 +1,36 @@
+<div class="header-container">
+  <div class="logo-container">
+    <a
+      href="#"
+      class="sidebar-toggle"
+      matRipple
+      [matRippleUnbounded]="true"
+      [matRippleCentered]="true"
+      (click)="toggleSidebar()"
+    >
+      <nb-icon [icon]="(materialTheme$ | async) ? 'menu-outline' : 'menu-2-outline'"></nb-icon>
+    </a>
+    <a class="logo" href="#" (click)="navigateHome()">WJA</a>
+  </div>
+</div>
+
+<div class="header-container">
+
+  <nb-actions size="small">
+
+    <nb-action
+      class="user-action"
+      *nbIsGranted="['view', 'user']"
+      matRipple
+      [matRippleUnbounded]="true"
+      [matRippleCentered]="true">
+      <button nbTooltip="Log Out" nbTooltipPlacement="bottom" nbButton ghost status="default" (click)="logout()">
+        <nb-icon class="action-icon" icon="log-out-outline"></nb-icon>
+      </button>
+
+      
+      
+
+    </nb-action>
+  </nb-actions>
+</div>

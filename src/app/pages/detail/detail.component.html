@@ -1,0 +1,85 @@
+<nb-card>
+  <nb-card-header> 
+    <button nbButton ghost (click)="back()"> <nb-icon icon="arrow-back-outline"  style="color: white;">arrow-back-outline</nb-icon> </button>
+    Student Detail 
+  </nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xxxl-6">
+        <nb-card>
+          <nb-card-header>
+            Student Contact Info
+          </nb-card-header>
+          <nb-card-body>
+            <nb-list>
+              <nb-list-item *ngFor="let item of contactInfo" style="flex-wrap: wrap;">
+                <p style="margin-right: 10px; font-weight: bold;">{{item.title}}:</p>
+                <p>{{item.value}}</p>
+              </nb-list-item>              
+            </nb-list>
+          </nb-card-body>        
+        </nb-card>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xxxl-6">
+        <nb-card>
+          <nb-card-header>
+            High School Info
+          </nb-card-header>
+          <nb-card-body>
+            <nb-list>
+              <nb-list-item *ngFor="let item of highSchoolInfo" style="flex-wrap: wrap;">
+                <p style="margin-right: 10px; font-weight: bold;">{{item.title}}:</p>
+                <p>{{item.value}}</p>
+              </nb-list-item>              
+            </nb-list>
+          </nb-card-body>        
+        </nb-card>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xxxl-6">
+        <nb-card>
+          <nb-card-header>
+            College Info
+          </nb-card-header>
+          <nb-card-body>
+            <nb-list>
+              <nb-list-item *ngFor="let item of collegeInfo" style="flex-wrap: wrap;">
+                <p style="margin-right: 10px; font-weight: bold;">{{item.title}}:</p>
+                <p>{{item.value}}</p>
+              </nb-list-item>              
+            </nb-list>
+          </nb-card-body>        
+        </nb-card>
+      </div> 
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xxxl-6">
+        <nb-card>
+          <nb-card-header>
+            Military Info
+          </nb-card-header>
+          <nb-card-body>
+            <nb-list>
+              <nb-list-item *ngFor="let item of militaryInfo" style="flex-wrap: wrap;">
+                <p style="margin-right: 10px; font-weight: bold;">{{item.title}}:</p>
+                <p>{{item.value}}</p>
+              </nb-list-item>              
+            </nb-list>
+          </nb-card-body>        
+        </nb-card>
+        <nb-card>
+          <nb-card-header>
+            Employment Info
+          </nb-card-header>
+          <nb-card-body>
+            <nb-list>
+              <nb-list-item *ngFor="let item of employmentInfo" style="flex-wrap: wrap;">
+                <p style="margin-right: 10px; font-weight: bold;">{{item.title}}:</p>
+                <p>{{item.value}}</p>
+              </nb-list-item>              
+            </nb-list>
+          </nb-card-body>        
+        </nb-card>
+      </div> 
+    </div>
+  </nb-card-body>
+</nb-card>
+  
