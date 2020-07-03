@@ -55,10 +55,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.studentService.GetAllStudents().subscribe((data:Student[])=>{
-      console.log(data);
-      console.log(data[0].getContactInfo());
       this.source.load(data);
-      console.log(this.source);
     });
     this.showDetail = false;
   }

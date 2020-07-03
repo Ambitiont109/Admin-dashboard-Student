@@ -1,8 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StudentService } from "../../student.service";
 import { Student } from "../../student";
 import { CONSTANTS } from "../../constants";
+import {
+  NbComponentStatus,
+  NbGlobalLogicalPosition,
+  NbGlobalPhysicalPosition,
+  NbGlobalPosition,
+  NbToastrService,
+  NbToastrConfig,
+  NbStepperComponent,
+} from '@nebular/theme';
+
 @Component({
   selector: 'ngx-add',
   templateUrl: './add.component.html',
@@ -10,6 +20,7 @@ import { CONSTANTS } from "../../constants";
 })
 export class AddComponent implements OnInit {
 
+  @ViewChild("stepper") stepper:NbStepperComponent;
   contactInfoForm: FormGroup;
   highSchoolInfoForm: FormGroup;
   collegeInfoForm: FormGroup;
@@ -27,7 +38,7 @@ export class AddComponent implements OnInit {
   valueListOfDegree: Array<any>;
 
   valueListOfBranchMilitary: Array<any>;
-  constructor(private fb: FormBuilder, private studentService:StudentService) {
+  constructor(private fb: FormBuilder, private studentService:StudentService, private toastrService: NbToastrService) {
     
   }
 
@@ -130,8 +141,26 @@ export class AddComponent implements OnInit {
     student.highschool_location = this.highSchoolInfoForm.value.location;
     student.locationOfCollege = this.collegeInfoForm.value.location;
     this.studentService.AddStudent(student).subscribe(resp=>{
-      console.log(resp);
+      this.showToast("success","Congratulations","A new Student has been added");
+      this.stepper.reset();
     })
+  }
+
+  private showToast(type: NbComponentStatus, title: string, body: string) {
+    const config = {
+      status: type,
+      destroyByClick: true,
+      duration: 3000,
+      hasIcon: true,
+      position:  NbGlobalPhysicalPosition.TOP_RIGHT,
+      preventDuplicates: false,
+    };
+    const titleContent = title ? `${title}` : '';
+
+    this.toastrService.show(
+      body,
+      `${titleContent}`,
+      config);
   }
 }
 
