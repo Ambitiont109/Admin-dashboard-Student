@@ -25,7 +25,7 @@ SECRET_KEY = '!^t&+u_1h(yrkrax0$2xz3ol($e@lu!aw40@*c91kp=(w+d5_f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.108.23', '127.0.0.1', 'localhost','64.227.24.128']
+ALLOWED_HOSTS = ['wja.gradata.org', '127.0.0.1','64.227.24.128']
 
 
 # Application definition
