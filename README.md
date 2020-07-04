@@ -1,4 +1,4 @@
-# [LiveSite(AUTOSZAFA)](http://autoszafa.autoszafa.eu/)
+# [LiveSite(wja.gradata.org)](http://wja.gradata.org/)
 # [BackEnd]
 This is the Django Backend based on Django Rest Framework with DotPay.
 
