@@ -1,8 +1,7 @@
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DEBUG = True
-ALLOWED_HOSTS = ['wja.gradata.org']
-# ALLOWED_HOSTS = ['192.232.213.37', 'standomsports.com']
+DEBUG = False
+ALLOWED_HOSTS = ['wja.gradata.org', '64.227.24.128']
 STATIC_URL = '/static/'
 # STATIC_ROOT = '/var/www/html/standom/static'
 # MEDIA_ROOT = '/var/www/html/standom/upload'
