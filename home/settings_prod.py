@@ -9,4 +9,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/var/www/html/gradata/static'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'upload')
 MEDIA_URL = '/media/'
-print("Debug Flase")
+print("Debug:", DEBUG)
