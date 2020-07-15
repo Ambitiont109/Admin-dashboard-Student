@@ -142,7 +142,7 @@ REST_FRAMEWORK = {
 }
 
 
-Env = os.environ.get('DJANOGO_ENV', 'local')
+Env = os.environ.get('DJANGO_ENV', 'local')
 print(Env)
 if Env == 'local':
     from .settings_local import *
