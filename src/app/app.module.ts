@@ -20,13 +20,17 @@ import {
   NbSidebarModule,
   NbToastrModule,
   NbStepperModule,
+  NbButtonModule,
   NbWindowModule,
   NbTooltipModule,
+  NbCardModule,
+  NbInputModule,
 } from '@nebular/theme';
 import { AuthInterceptor } from './auth.interceptor';
+import { YesNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, YesNoDialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -42,7 +46,11 @@ import { AuthInterceptor } from './auth.interceptor';
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
-
+    NbTooltipModule,
+    NbCardModule,
+    NbDialogModule,
+    NbButtonModule,
+    NbInputModule,
     CoreModule.forRoot(),
   ],
   providers:[

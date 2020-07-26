@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { StudentService } from "../../student.service";
 import { Student } from '../../student';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 
@@ -12,6 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy  {
   students:Student[];
   private unsubscribeAll: Subject<any> = new Subject<any>();
+  private studentSubScription:Subscription;
   constructor(private studentService:StudentService){
     this.students = new Array<Student>();
   }
@@ -27,15 +28,15 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy  {
     // });
   }
   ngAfterViewInit(){
-    this.studentService.GetAllStudents().pipe(
+    this.studentSubScription =  this.studentService.students.pipe(
       takeUntil(this.unsubscribeAll)
-    ).subscribe((data:Student[])=>{
-      this.students = data;
+    ).subscribe((students:Student[])=>{
+      this.students = students;
     })
   }
   ngOnDestroy(){
-    // this.unsubscribeAll.next();
-    // this.unsubscribeAll.complete();
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
   }
   
 }

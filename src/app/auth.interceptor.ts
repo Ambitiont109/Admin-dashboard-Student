@@ -33,7 +33,10 @@ export class AuthInterceptor implements HttpInterceptor {
                             reason: error && error.error && error.error.reason ? error.error.reason : '',
                             status: error.status
                         };
-                        this.router.navigate(['/auth/login']);
+                        if(error.status == 401){
+                            this.router.navigate(['/auth/login']);
+                        }
+                        
                         return throwError(error);
                     })
                 );

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StudentService } from "../../student.service";
 import { Student } from "../../student";
@@ -21,11 +21,14 @@ import {
 export class AddComponent implements OnInit {
 
   @ViewChild("stepper") stepper:NbStepperComponent;
+  @Input() student:Student;
+  @Output('onUpdateDone') onUpdateEvent = new EventEmitter();
   contactInfoForm: FormGroup;
   highSchoolInfoForm: FormGroup;
   collegeInfoForm: FormGroup;
   militaryInfoForm: FormGroup;
   employmentInfoForm: FormGroup;
+  isEditMode: boolean;
 
   years: Array<string>;
   typeListOfHighSchool: Array<string>;
@@ -38,11 +41,10 @@ export class AddComponent implements OnInit {
   valueListOfDegree: Array<any>;
 
   valueListOfBranchMilitary: Array<any>;
-  constructor(private fb: FormBuilder, private studentService:StudentService, private toastrService: NbToastrService) {
-    
+  constructor(private fb: FormBuilder, private studentService:StudentService, private toastrService: NbToastrService) {    
+    this.constructForm();
   }
-
-  ngOnInit() {
+  constructForm(){
     this.years = CONSTANTS.years;
     this.typeListOfHighSchool=CONSTANTS.typeListOfHighSchool;
     this.valueListOfIsGrudated = CONSTANTS.valueListOfIsGrudated;
@@ -95,6 +97,23 @@ export class AddComponent implements OnInit {
       jobTitle:['', Validators.nullValidator]
     })
   }
+  initFromStudent(student: Student){
+    this.contactInfoForm.reset(student);
+    this.highSchoolInfoForm.reset(student);
+    this.collegeInfoForm.reset(student);
+    this.militaryInfoForm.reset(student);
+    this.employmentInfoForm.reset(student);
+    this.collegeInfoForm.get('location').setValue(this.student.locationOfCollege);
+    this.highSchoolInfoForm.get('location').setValue(this.student.highschool_location);
+  }
+  ngOnInit() {
+    if(this.student){
+      this.isEditMode = true;
+      this.initFromStudent(this.student);
+    }else{
+      this.isEditMode = false;
+    }
+  }
   isInvalid(form:FormGroup, field_name:string): boolean {
     let control = form.get(field_name);
     return control.invalid && (control.dirty || control.touched)
@@ -131,7 +150,7 @@ export class AddComponent implements OnInit {
   SaveStudent(){
     let student = new Student();
     console.log(this.contactInfoForm.value);
-    student = Object.assign({},this.contactInfoForm.value);
+    student = Object.assign(student,this.contactInfoForm.value);
     student = Object.assign(student, this.highSchoolInfoForm.value);
     student = Object.assign(student, this.collegeInfoForm.value);
     student = Object.assign(student, this.militaryInfoForm.value);
@@ -140,10 +159,19 @@ export class AddComponent implements OnInit {
     student.highschool_name = this.highSchoolInfoForm.value.name;
     student.highschool_location = this.highSchoolInfoForm.value.location;
     student.locationOfCollege = this.collegeInfoForm.value.location;
-    this.studentService.AddStudent(student).subscribe(resp=>{
-      this.showToast("success","Congratulations","A new Student has been added");
-      this.stepper.reset();
-    })
+
+    if(this.isEditMode){
+      student.id = this.student.id;
+      this.studentService.UpdateStudent(student).subscribe( res => {
+        this.onUpdateEvent.emit(student);
+        this.showToast("primary","Congratulations","A new Student has been updated");
+      })
+    }else{
+      this.studentService.AddStudent(student).subscribe(resp=>{
+        this.showToast("primary","Congratulations","A new Student has been added");
+        this.stepper.reset();
+      })
+    }
   }
 
   private showToast(type: NbComponentStatus, title: string, body: string) {

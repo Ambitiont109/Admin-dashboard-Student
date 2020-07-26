@@ -2,6 +2,7 @@ import { Component, OnInit, ɵConsole } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { StudentService } from "../../student.service";
 import { Student } from '../../student';
+import { Subject, Subscription }        from 'rxjs';
 @Component({
   selector: 'ngx-list',
   templateUrl: './list.component.html',
@@ -26,20 +27,20 @@ export class ListComponent implements OnInit {
     },
     hideSubHeader:true,
     columns: {
-      id: {
-        title: 'ID',
+      graduateWJA: {
+        title: 'Year',
         type: 'number',
       },
       name: {
         title: 'Name',
         type: 'string',
       },
-      email: {
-        title: 'Email',
+      isContracted: {
+        title: 'Contatced',
         type: 'string',
       },
-      staffName: {
-        title: 'Staff',
+      isEngaged: {
+        title: 'Engaged',
         type: 'string',
       },
     },
@@ -49,14 +50,17 @@ export class ListComponent implements OnInit {
   searchWord:string;
   selectedStudent:Student;
   showDetail:boolean;
+  private studentSubScription:Subscription;
   constructor(private studentService:StudentService) { 
     this.source = new LocalDataSource();
   }
 
   ngOnInit(): void {
-    this.studentService.GetAllStudents().subscribe((data:Student[])=>{
-      this.source.load(data);
-    });
+    this.studentSubScription =  this.studentService.students.subscribe((students:Student[])=>{
+      console.log("SubScribed")
+      this.source.load(students);
+    })
+    this.studentService.GetAllStudents();
     this.showDetail = false;
   }
   onSearchWordChange(newWord:string){
@@ -75,4 +79,8 @@ export class ListComponent implements OnInit {
     console.log("========");
     this.showDetail = false;
   }
+  ngOnDestroy(): void {
+    this.studentSubScription.unsubscribe();
+	}
+
 }
