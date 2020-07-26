@@ -12,6 +12,6 @@ router.register(r'students', views.StudentViewSet, basename='student')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('login/',token_views.obtain_auth_token),
-    path('test/',views.findVin)
+    path('login/', token_views.obtain_auth_token),
+    path('test/', views.findVin)
 ]
