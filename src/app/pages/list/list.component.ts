@@ -36,7 +36,7 @@ export class ListComponent implements OnInit {
         type: 'string',
       },
       isContracted: {
-        title: 'Contatced',
+        title: 'Contacted',
         type: 'string',
       },
       isEngaged: {

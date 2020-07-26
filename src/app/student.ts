@@ -65,7 +65,7 @@ export class Student{
       {key:'typeOfHighSchool',title:'What type of high school did the student attend',value:this.typeOfHighSchool},
       {key:'isReceivedAid',title:'Did the student receive aid for high school?',value:this.isReceivedAid},
       {key:'isGraduated',title:'Did the student graduate high school?',value:this.isGraduated},
-      {key:'highschool_name',title:'Name of high school student attended',value:this.name},
+      {key:'highschool_name',title:'Name of high school student attended',value:this.highschool_name},
       {key:'highschool_location',title:'Where is the high school located?',value:this.highschool_location},
     ]
     return data;
