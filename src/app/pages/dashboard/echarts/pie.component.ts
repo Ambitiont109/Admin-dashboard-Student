@@ -5,15 +5,20 @@ import { CONSTANTS } from "../../../constants";
 @Component({
   selector: 'ngx-echarts-pie',
   template: `
-    <div echarts [options]="options" class="echart"></div>
+    <div echarts [options]="options" class="echart" *ngIf="seriesData.length > 0"></div>
   `,
 })
 export class EchartsPieComponent implements  OnDestroy, OnInit, OnChanges {
   @Input() students:Student[]
+  @Input() seriesData:[]
+  @Input() seriesName:string
   options: any;
   themeSubscription: any;
+  public dashboardItems:{key:string, value:string}[];
   
   constructor(private theme: NbThemeService) {
+    this.dashboardItems = CONSTANTS.dashboardItems;
+    this.seriesName=undefined;
   }
   ngOnInit(){
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
@@ -74,13 +79,23 @@ export class EchartsPieComponent implements  OnDestroy, OnInit, OnChanges {
           },
         ],
       };
-      this.PieByTypeOfHighSchool();
+      // this.PieByTypeOfHighSchool();
     });
   }
 
   ngOnChanges(changes:SimpleChanges){
-    if(this.options){
-      this.PieByTypeOfHighSchool();
+    console.log("ngOnChanges")
+    if(this.seriesData.length >0){
+      console.log(this.seriesData)
+      this.options.series[0].data=this.seriesData;
+      this.options.series[0].name= this.seriesName
+      let tmp_arr=[]
+      this.seriesData.forEach(item=>{
+        tmp_arr.push(item['name']);
+      })
+      this.options.legend.data = tmp_arr
+      this.options = Object.assign({}, this.options);
+      // this.PieByTypeOfHighSchool();
     }
   }
 

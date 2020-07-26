@@ -98,5 +98,25 @@ export const CONSTANTS = {
         {key:'marine_corps', value:'Marine Corps'},
         {key:'air_force', value:'Air Force'},
         {key:'national_guard', value:'National Guard'}
+    ],
+
+    dashboardItems:[
+        {key: "isContracted", value: "Has the student been contacted? "},
+        {key: "isEngaged", value: "Has the student been engaged? "},
+        {key: "isgrduateWJA", value: "Did the student graduate WJA? "},
+        {key: "graduateWJA", value: "What year did the student graduate WJA?"},
+        {key: "isAttendHighSchool", value: "Did the student attend high School?"},
+        {key: "typeOfHighSchool", value: "What type of high school did the student attend?"},
+        {key: "isReceivedAid", value: "Did the student receive aid for high school?"},
+        {key: "isGraduated", value: "Did the student graduate high school?"},
+        {key: "highschool_location", value: "Where is the high school located?"},
+        {key: "isAttendCollege", value: "Did the student attend College?"},
+        {key: "typeOfCollege", value: "What type of college did the student attend?"},
+        {key: "isReceivedScholarship", value: "Did the student receive scholarships?"},
+        {key: "isGraduatedCollege", value: "Did the Student graduate College?"},
+        {key: "locationOfCollege", value: "Where is the college located?"},
+        {key: "isEnlistMilitary", value: "Did the student enlist in the military?"},
+        {key: "branchOfMilitary", value: " Which branch of the military?"},
+        {key: "isEmployed", value: "Is the student employed??"}        
     ]
 }
